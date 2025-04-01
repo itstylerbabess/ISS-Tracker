@@ -4,7 +4,7 @@
 
 This project provides a containerized Flask application that ingests, processes, and analyzes International Space Station (ISS) orbital trajectory data. The application retrieves data from the ISS website and stores it in a Redis database container for persistence. It allows querying of the ISS data via several Flask routes and uses Docker Compose to manage both the Flask app and Redis container.
 
-The project also calculates key statistics like speed and position for the ISS based on its orbital trajectory data. A new `/epochs/<epoch>/location` route and an updated `/now` route are added to provide real-time geographical information (latitude, longitude, altitude, and geoposition) for a specific epoch and the nearest epoch to the current time.
+The project also calculates key statistics like speed and position for the ISS based on its orbital trajectory data, while also providing real-time geographical information (latitude, longitude, altitude, and geoposition) for a specific epoch and the nearest epoch to the current time.
 
 ## Dataset
 
@@ -29,7 +29,7 @@ Both contain **15 days of state vector data**, including position, velocity, and
 ## Flask App Routes (app.py)
 
 - **`/epochs`** – Returns the entire data set.
-- **`/epochs?limit=int&offset=int`** – Returns a modified list of Epochs based on query parameters.
+- **`/epochs?limit=<int>&offset=<int>`** – Returns a modified list of Epochs based on query parameters.
 - **`/epochs/<epoch>`** – Returns state vectors for a specific Epoch.
 - **`/epochs/<epoch>/speed`** – Returns the instantaneous speed for a specific Epoch.
 - **`/epochs/<epoch>/location`** – Returns the latitude, longitude, altitude, and geoposition for a specific Epoch.
@@ -39,7 +39,7 @@ Both contain **15 days of state vector data**, including position, velocity, and
 
 ### Prerequisites
 - **Flask** (for web application development)
-- **Docker** (for containerized execution)
+- **Docker** (for containerized execution and redis image execution)
 - **Python 3.0** (for local execution)
 - **pip** (for package installation)
 
@@ -49,7 +49,7 @@ Both contain **15 days of state vector data**, including position, velocity, and
 docker compose up --build
 ```
 
-## Run the Routes
+## Running the Routes
 ```bash
 curl http://127.0.0.1:5000/epochs
 ```
@@ -90,3 +90,5 @@ Logging and error handling ensure robustness against missing or malformed data.
 The Redis container stores data backups in the ./data directory. The backups should not be committed to your Git repository.
 
 This project follows best practices in software design and documentation and is designed to be scalable and flexible with Docker Compose for orchestration and Redis for persistence.
+
+This project strives to adhere to best practices in software design and documentation, with guidance from ChatGPT to structure the README and refine Python implementation.
